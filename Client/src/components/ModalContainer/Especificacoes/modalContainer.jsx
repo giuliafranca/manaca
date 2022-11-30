@@ -1,5 +1,4 @@
 import React from "react";
-// import './modalContainer.css';
 
 function ModalContainer(props) {
     return(

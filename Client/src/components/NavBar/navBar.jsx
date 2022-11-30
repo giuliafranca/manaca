@@ -1,36 +1,87 @@
-import React from "react";
-function NavBar() {
+import { useState } from "react"; // import state
+
+export default function NavBar() {
+  const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
+
   return (
-    <>
-      <nav className="navbar fixed-top navbar-expand-lg" style={{backgroundColor: "#0099FF"}}>
-        <div className="container-fluid">
-          
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse justify-content-evenly" id="navbarNav">
-            <ul className="navbar-nav">
-              <li><img src={brand} alt="" className=" me-5 mt-3"/></li>
-              <li className="nav-item">
-                <a className="nav-link active text-white mx-5 mb-3 mt-3" aria-current="page" href="#">Sobre</a>
+    <div className="flex items-center justify-between border-b border-gray-400 py-8">
+      <a href="/">
+        <img src="https://designbygio.it/images/logo.png" alt="logo" />
+      </a>
+      <nav>
+        <section className="MOBILE-MENU flex lg:visible">
+          <div
+            className="HAMBURGER-ICON space-y-2"
+            onClick={() => setIsNavOpen((prev) => !prev)} // toggle isNavOpen state on click
+          >
+            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+          </div>
+
+          <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}> 
+            <div
+              className="CROSS-ICON absolute top-0 right-0 px-8 py-8"
+              onClick={() => setIsNavOpen(false)} // change isNavOpen state to false to close the menu
+            >
+              <svg
+                className="h-8 w-8 text-gray-600"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </div>
+            <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between min-h-[250px]">
+              <li className="border-b border-gray-400 my-8 uppercase">
+                <a href="/about">About</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-white mx-4 mb-3 mt-3" href="#">Serviços</a>
+              <li className="border-b border-gray-400 my-8 uppercase">
+                <a href="/portfolio">Portfolio</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link text-white mx-4 mb-3 mt-3" href="#">Contato</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link text-white mx-4 mt-3">Portifolio</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link px-4 bg-light ms-4 mb-3 mt-3" style={{color: "#0099FF"}}>Faça um orçamento</a>
+              <li className="border-b border-gray-400 my-8 uppercase">
+                <a href="/contact">Contact</a>
               </li>
             </ul>
           </div>
-        </div>
+        </section>
+
+        <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/portfolio">Portfolio</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+        </ul>
       </nav>
-    </>
-  )
+      <style>{`
+      .hideMenuNav {
+        display: none;
+      }
+      .showMenuNav {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background: white;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+    `}</style>
+    </div>
+  );
 }
-export default NavBar;
