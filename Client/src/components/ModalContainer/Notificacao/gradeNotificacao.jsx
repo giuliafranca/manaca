@@ -5,7 +5,7 @@ const GradeNotificacao = [
     },
     {
         titulo: "Temperatura",
-        alteracao: "28 °C." 
+        alteracao: "28 °C" 
     },
     {
         titulo: "Umidade",

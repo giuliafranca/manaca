@@ -1,7 +1,7 @@
 const GradeContainer = [
     {
         titulo: "Temperatura",
-        desc: "25 °C." 
+        desc: "25 °C" 
     },
     {
         titulo: "Umidade",

@@ -1,4 +1,5 @@
 import React from "react";
+import './modalContainer.css';
 import ModalContainer from "../../components/ModalContainer/Especificacoes/modalContainer";
 import GradeContainer from "../../components/ModalContainer/Especificacoes/gradeContainer";
 import NotificacaoContainer from "../../components/ModalContainer/Notificacao/notificacaoContainer";
