@@ -1,1 +1,1 @@
-import './modalFuncionalidade.css';
+// import './modalFuncionalidade.css';
