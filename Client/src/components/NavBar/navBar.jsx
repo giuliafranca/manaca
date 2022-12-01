@@ -1,4 +1,5 @@
-import hamburgericon from '../../../assets/svg/Vector.svg'
+import hamburgericon from '../../assets/Vector.svg';
+import fotoperfil from '../../assets/Perfil.svg';
 import { Link } from "react-router-dom";
 import React from 'react';
 export default function NavBar() {
@@ -8,19 +9,21 @@ export default function NavBar() {
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-0 mb-0 bg-purple-nav h-fit">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-            <Link to="/"
-              className="text-sm font-bold leading-relaxed inline-block mr-4 py-1 "
-              href="#pablo"
+          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start items-center">
+
+          <button
+              className="text-black cursor-pointer text-xl leading-none px-3 py-1 border   color-black border-none bg-none block outline-none focus:outline-none"
+              type="button"
             >
-              <img src="" alt="" className="h-14 w-auto" />
-            </Link>
+              <i className="fas fa-bars px-3 py-2 cursor-pointer"><img src={fotoperfil} alt="" /></i>
+            </button>
+
             <button
-              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border  border-transparent  bg-transparent block lg:hidden outline-none focus:outline-none"
+              className="text-black cursor-pointer text-xl leading-none px-3 py-1 border  border-transparent color-black bg-transparent block lg:hidden outline-none focus:outline-none"
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
-              <i className="fas fa-bars"><img src={hamburgericon} alt="" /></i>
+              <i className="flex fas fa-bars px-3 py-2 cursor-pointer"><img src={hamburgericon} alt="" /></i>
             </button>
           </div>
           <div
@@ -30,19 +33,14 @@ export default function NavBar() {
             }
             id="example-navbar-danger"
           >
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="nav-item px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><Link to="/" className="ml-2">Container</Link>
-              </li>
-              <li className="nav-item px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                <i className="fab fa-twitter text-lg leading-lg text-white opacity-75"></i><Link to="/" className="ml-2">Container</Link>
-              </li>
-              <li className="nav-item px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-                <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><Link to="/" className="ml-2">Container</Link>
+            <ul className="flex relative flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="nav-item px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75">
+                <i className="fab fa-facebook-square text-lg leading-lg text-black opacity-75"></i><Link to="/" className="ml-2 text-black">Container</Link>
               </li>
             </ul>
-          </div>
+          </div>       
         </div>
+            <h1 className="flex fas fa-bars px-1 py-3">Bem vindo de volta, João!</h1>
       </nav>
     </>
 

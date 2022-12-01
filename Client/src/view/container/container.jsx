@@ -1,4 +1,13 @@
-import React from 'react';
-import ModalFuncionalidade from "../../components/ModalFuncionalidade/modalFuncionalidade";
-import ModalAlteracao from "../../components/ModalPopUp/modalAlteracao";
-import ModalVegetal from "../../components/ModalPopUp/modalVegetal";
+import React from "react";
+import NavBar from "../../components/NavBar/navBar"
+
+function Home() {
+  return (
+    <>
+      <nav>
+        <NavBar />
+      </nav>
+    </>
+  );
+}
+export default Home;
