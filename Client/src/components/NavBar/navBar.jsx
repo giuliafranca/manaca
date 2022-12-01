@@ -1,87 +1,51 @@
-import { useState } from "react"; // import state
-
+import hamburgericon from '../../../assets/svg/Vector.svg'
+import { Link } from "react-router-dom";
+import React from 'react';
 export default function NavBar() {
-  const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   return (
-    <div className="flex items-center justify-between border-b border-gray-400 py-8">
-      <a href="/">
-        <img src="https://designbygio.it/images/logo.png" alt="logo" />
-      </a>
-      <nav>
-        <section className="MOBILE-MENU flex lg:visible">
-          <div
-            className="HAMBURGER-ICON space-y-2"
-            onClick={() => setIsNavOpen((prev) => !prev)} // toggle isNavOpen state on click
-          >
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-          </div>
-
-          <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}> 
-            <div
-              className="CROSS-ICON absolute top-0 right-0 px-8 py-8"
-              onClick={() => setIsNavOpen(false)} // change isNavOpen state to false to close the menu
+    <>
+      <nav className="relative flex flex-wrap items-center justify-between px-2 py-0 mb-0 bg-purple-nav h-fit">
+        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+            <Link to="/"
+              className="text-sm font-bold leading-relaxed inline-block mr-4 py-1 "
+              href="#pablo"
             >
-              <svg
-                className="h-8 w-8 text-gray-600"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </div>
-            <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between min-h-[250px]">
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/about">About</a>
+              <img src="" alt="" className="h-14 w-auto" />
+            </Link>
+            <button
+              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border  border-transparent  bg-transparent block lg:hidden outline-none focus:outline-none"
+              type="button"
+              onClick={() => setNavbarOpen(!navbarOpen)}
+            >
+              <i className="fas fa-bars"><img src={hamburgericon} alt="" /></i>
+            </button>
+          </div>
+          <div
+            className={
+              "lg:flex flex-grow items-center justify-center" +
+              (navbarOpen ? " flex" : " hidden")
+            }
+            id="example-navbar-danger"
+          >
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="nav-item px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><Link to="/" className="ml-2">Container</Link>
               </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/portfolio">Portfolio</a>
+              <li className="nav-item px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                <i className="fab fa-twitter text-lg leading-lg text-white opacity-75"></i><Link to="/" className="ml-2">Container</Link>
               </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/contact">Contact</a>
+              <li className="nav-item px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><Link to="/" className="ml-2">Container</Link>
               </li>
             </ul>
           </div>
-        </section>
-
-        <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="/portfolio">Portfolio</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
-          </li>
-        </ul>
+        </div>
       </nav>
-      <style>{`
-      .hideMenuNav {
-        display: none;
-      }
-      .showMenuNav {
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        background: white;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-      }
-    `}</style>
-    </div>
+    </>
+
+
   );
 }
