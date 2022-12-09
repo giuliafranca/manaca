@@ -2,25 +2,23 @@ alter session set nls_date_format = 'DD/MM/YYYY HH24:MI:SS';
 
 create table tb_cliente(
     id_C int not null,
-    nome varchar2(30) not null,
-    cpf varchar2(14) not null,
-    senha varchar2(60) not null,
-    email varchar2(60) not null,
+    nome varchar(30) not null,
+    cpf varchar(14) not null,
+    senha varchar(60) not null,
+    email varchar(60) not null,
     
     primary key(id_c)
 );
 
 create sequence sq_cliente
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_container(
     id_co int not null,
     id_c int not null,
-    endereco varchar2(120) not null,
-    cor_luz varchar2(20) not null,
+    endereco varchar(120) not null,
+    cor_luz varchar(20) not null,
     intensidade_luz numeric(5,2) not null,
     intensidade_irrigacao int not null,
     periodo_irrigacao int not null,
@@ -33,10 +31,8 @@ create table tb_container(
 );
 
 create sequence sq_container
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_log_intensidade_luz(
     id_lil int not null,
@@ -48,10 +44,8 @@ create table tb_log_intensidade_luz(
 );
 
 create sequence sq_log_intensidade_luz
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_log_intensidade_irrigacao(
     id_lii int not null,
@@ -63,10 +57,8 @@ create table tb_log_intensidade_irrigacao(
 );
 
 create sequence sq_log_intensidade_irrigacao
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_log_capacidade_tanque_atu(
     id_lcta int not null,
@@ -78,25 +70,21 @@ create table tb_log_capacidade_tanque_atu(
 );
 
 create sequence sq_log_capacidade_tanque_atu
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_log_cor_luz(
     id_lcl int not null,
     id_co int not null,
-    cor_luz varchar2(20) not null,
+    cor_luz varchar(20) not null,
     data_hora date not null,
     
     primary key(id_lcl)
 );
 
 create sequence sq_log_cor_luz
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_log_periodo_irrigacao(
     id_lpi int not null,
@@ -108,10 +96,8 @@ create table tb_log_periodo_irrigacao(
 );
 
 create sequence sq_log_periodo_irrigacao
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_log_temperatura(
     id_lt int not null,
@@ -123,10 +109,8 @@ create table tb_log_temperatura(
 );
 
 create sequence sq_log_temperatura
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_log_umidade(
     id_lu int not null,
@@ -138,10 +122,8 @@ create table tb_log_umidade(
 );
 
 create sequence sq_log_umidade
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_plantado(
     id_p int not null,
@@ -152,16 +134,14 @@ create table tb_plantado(
 );
 
 create sequence sq_plantado
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_vegetal(
     id_v int not null,
     nome varchar(30) not null,
     temperatura_ideal numeric(5,2) not null,
-    cor_luz_ideal varchar2(20) not null,
+    cor_luz_ideal varchar(20) not null,
     umidade_ideal numeric(5,2) not null,
     periodo_irrigacao_ideal int not null,
     intensidade_irrigacao_ideal int not null,
@@ -172,10 +152,8 @@ create table tb_vegetal(
 );
 
 create sequence sq_vegetal
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_movimentacoes_plantacao(
     id_mp int not null,
@@ -187,23 +165,19 @@ create table tb_movimentacoes_plantacao(
 );
 
 create sequence sq_movimentacoes_plantacao
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 create table tb_tipo_movimentacao(
     id_tm int not null,
-    nome varchar2(20) not null,
+    nome varchar(20) not null,
     
     primary key(id_tm)
 );
 
 create sequence sq_tipo_movimentacao
-start with 0
-minvalue 0
-increment by 1
-order;
+start with 1
+increment by 1;
 
 alter table tb_container add constraint fk_tb_container
 foreign key(id_c) references tb_cliente(id_c);
