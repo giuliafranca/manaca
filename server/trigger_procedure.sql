@@ -38,21 +38,24 @@ end;
     
 --O trigger tr_insert_container é responsável por gerar o registro da primeira entrada de um container no sistema,--
 --captando as configurações iniciais--
+create or replace function insert_trigger_func()
+returns trigger as $$
+begin
+	insert into tb_log_cor_luz values(sq_log_cor_luz.nextval,new.id_co,new.cor_luz,current_date);
+	insert into tb_log_periodo_irrigacao values(sq_log_periodo_irrigacao.nextval,new.id_co,new.periodo_irrigacao,current_date);
+	insert into tb_log_temperatura values(sq_log_temperatura.nextval,new.id_co,new.temperatura,current_date);
+	insert into tb_log_umidade values(sq_log_umidade.nextval,new.id_co,new.umidade,current_date);
+	insert into tb_log_intensidade_luz values(sq_log_intensidade_luz.nextval,new.id_co,new.intensidade_luz,current_date);
+	insert into tb_log_intensidade_irrigacao values(sq_log_intensidade_irrigacao.nextval,new.id_co,new.intensidade_irrigacao,current_date);
+	insert into tb_log_capacidade_tanque_atu values(sq_log_capacidade_tanque_atu.nextval,new.id_co,new.capacidade_tanque_atu,current_date);
+return null;
+end;
+$$ language plpgsql;
 
-create or replace trigger tr_insert_container
+create or replace trigger tg_insert_container
 after insert on tb_container
 for each row
-
-begin
-        insert into tb_log_cor_luz values(sq_log_cor_luz.nextval,:new.id_co,:new.cor_luz,SYSDATE);
-        insert into tb_log_periodo_irrigacao values(sq_log_periodo_irrigacao.nextval,:new.id_co,:new.periodo_irrigacao,SYSDATE);
-        insert into tb_log_temperatura values(sq_log_temperatura.nextval,:new.id_co,:new.temperatura,SYSDATE);
-        insert into tb_log_umidade values(sq_log_umidade.nextval,:new.id_co,:new.umidade,SYSDATE);
-        insert into tb_log_intensidade_luz values(sq_log_intensidade_luz.nextval,:new.id_co,:new.intensidade_luz,SYSDATE);
-        insert into tb_log_intensidade_irrigacao values(sq_log_intensidade_irrigacao.nextval,:new.id_co,:new.intensidade_irrigacao,SYSDATE);
-        insert into tb_log_capacidade_tanque_atu values(sq_log_capacidade_tanque_atu.nextval,:new.id_co,:new.capacidade_tanque_atu,SYSDATE);
-end;
-
+execute procedure insert_trigger_func();
 
 --A procedure pc_checa_condicoes é responsável por checar se cada uma das configurações do container está de acordo com o que é ideal para cada vegetal,--
 --e devolve os parâmetros que não estiverem dentro da tolerância como 1. Essa procedure foi feita para ser utilizada pela aplicação,--
