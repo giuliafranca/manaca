@@ -111,45 +111,52 @@ begin
     
     IF(vCor_luz <> vCor_luz_ideal) THEN
         pCOR_LUZ := 1;
+		RAISE NOTICE 'valor fora dos parametros ideais';
     ELSE 
         pCOR_LUZ := 0;
+		RAISE NOTICE 'valor dentro dos parametros ideais';
     END IF;
     
     IF(vIntensidade_luz < (vIntensidade_luz_ideal - 5) or vIntensidade_luz > (vIntensidade_luz_ideal + 5)) THEN
         pINTENSIDADE_LUZ := 1;
+		RAISE NOTICE 'valor fora dos parametros ideais';
     ELSE 
         pINTENSIDADE_LUZ := 0;
+		RAISE NOTICE 'valor dentro dos parametros ideais';
     END IF;
     
     IF(vIntensidade_irrigacao < (vIntensidade_irrigacao_ideal*0.95) or vIntensidade_irrigacao > (vIntensidade_irrigacao_ideal*1.05)) THEN
         pINTENSIDADE_IRRIGACAO := 1;
+		RAISE NOTICE 'valor fora dos parametros ideais';
     ELSE 
         pINTENSIDADE_IRRIGACAO := 0;
+		RAISE NOTICE 'valor dentro dos parametros ideais';
     END IF;
     
     IF(vPeriodo_irrigacao < (vPeriodo_irrigacao_ideal*0.95) or vPeriodo_irrigacao > (vPeriodo_irrigacao_ideal*1.05)) THEN
         pPERIODO_IRRIGACAO := 1;
+		RAISE NOTICE 'valor fora dos parametros ideais';
     ELSE 
         pPERIODO_IRRIGACAO := 0;
+		RAISE NOTICE 'valor dentro dos parametros ideais';
     END IF;
     
     IF(vTemperatura < (vTemperatura_ideal*0.95) or vTemperatura > (vTemperatura_ideal*1.05)) THEN
         pTEMPERATURA := 1;
+		RAISE NOTICE 'valor fora dos parametros ideais';
     ELSE 
         pTEMPERATURA := 0;
+		RAISE NOTICE 'valor dentro dos parametros ideais';
     END IF;
     
     IF(vUmidade < (vUmidade_ideal - 5) or vUmidade > (vUmidade_ideal + 5)) THEN
         pUMIDADE := 1;
+		RAISE NOTICE 'valor fora dos parametros ideais';
     ELSE 
         pUMIDADE := 0;
+		RAISE NOTICE 'valor dentro dos parametros ideais';
     END IF;
 end;$$
 
 -- TESTE DA PROCEDURE pc_checa_condicoes (TEM QUE COLOCAR PRA PRINTAR NOS IFS E ELSES)-- 
-DECLARE
-pCOR_LUZ INT := 0; pINTENSIDADE_LUZ INT := 0; pINTENSIDADE_IRRIGACAO INT := 0; pPERIODO_IRRIGACAO INT := 0; pTEMPERATURA INT := 0;
-     pUMIDADE INT := 0;
-BEGIN 
-pc_checa_condicoes(2, pCOR_LUZ, pINTENSIDADE_LUZ, pINTENSIDADE_IRRIGACAO, pPERIODO_IRRIGACAO, pTEMPERATURA, pUMIDADE);
-END;
+CALL pc_checa_condicoes(3, 0, 0, 0, 0, 0, 0);
