@@ -44,13 +44,13 @@ execute procedure update_trigger_func();
 create or replace function insert_trigger_func()
 returns trigger as $$
 begin
-	insert into tb_log_cor_luz values(sq_log_cor_luz.nextval,new.id_co,new.cor_luz,current_date);
-	insert into tb_log_periodo_irrigacao values(sq_log_periodo_irrigacao.nextval,new.id_co,new.periodo_irrigacao,current_date);
-	insert into tb_log_temperatura values(sq_log_temperatura.nextval,new.id_co,new.temperatura,current_date);
-	insert into tb_log_umidade values(sq_log_umidade.nextval,new.id_co,new.umidade,current_date);
-	insert into tb_log_intensidade_luz values(sq_log_intensidade_luz.nextval,new.id_co,new.intensidade_luz,current_date);
-	insert into tb_log_intensidade_irrigacao values(sq_log_intensidade_irrigacao.nextval,new.id_co,new.intensidade_irrigacao,current_date);
-	insert into tb_log_capacidade_tanque_atu values(sq_log_capacidade_tanque_atu.nextval,new.id_co,new.capacidade_tanque_atu,current_date);
+	insert into tb_log_cor_luz values(nextval('sq_log_cor_luz'),new.id_co,new.cor_luz,current_date);
+	insert into tb_log_periodo_irrigacao values(nextval('sq_log_periodo_irrigacao'),new.id_co,new.periodo_irrigacao,current_date);
+	insert into tb_log_temperatura values(nextval('sq_log_temperatura'),new.id_co,new.temperatura,current_date);
+	insert into tb_log_umidade values(nextval('sq_log_umidade'),new.id_co,new.umidade,current_date);
+	insert into tb_log_intensidade_luz values(nextval('sq_log_intensidade_luz'),new.id_co,new.intensidade_luz,current_date);
+	insert into tb_log_intensidade_irrigacao values(nextval('sq_log_intensidade_irrigacao'),new.id_co,new.intensidade_irrigacao,current_date);
+	insert into tb_log_capacidade_tanque_atu values(nextval('sq_log_capacidade_tanque_atu'),new.id_co,new.capacidade_tanque_atu,current_date);
 return null;
 end;
 $$ language plpgsql;
