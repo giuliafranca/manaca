@@ -63,11 +63,12 @@ execute procedure insert_trigger_func();
 --A procedure pc_checa_condicoes é responsável por checar se cada uma das configurações do container está de acordo com o que é ideal para cada vegetal,--
 --e devolve os parâmetros que não estiverem dentro da tolerância como 1. Essa procedure foi feita para ser utilizada pela aplicação,--
 --de modo a enviar notificações para o usuário periodicamente, caso algo esteja fora dos conformes.--
-
-CREATE OR REPLACE PROCEDURE pc_checa_condicoes 
+create or replace procedure pc_checa_condicoes 
     (pID_CO IN INT, pCOR_LUZ OUT INT, pINTENSIDADE_LUZ OUT INT, pINTENSIDADE_IRRIGACAO OUT INT, pPERIODO_IRRIGACAO OUT INT, pTEMPERATURA OUT INT,
      pUMIDADE OUT INT)
-AS 
+language plpgsql
+as $$
+declare
     vCor_luz tb_container.cor_luz%TYPE; 
     vIntensidade_luz tb_container.intensidade_luz%TYPE; 
     vIntensidade_irrigacao tb_container.intensidade_irrigacao%TYPE; 
@@ -82,7 +83,7 @@ AS
     vPeriodo_irrigacao_ideal tb_vegetal.periodo_irrigacao_ideal%TYPE;
     vTemperatura_ideal tb_vegetal.temperatura_ideal%TYPE;
     vUmidade_ideal tb_vegetal.umidade_ideal%TYPE;
-BEGIN
+begin
     vID_CO := pID_CO;
     SELECT cor_luz INTO vCor_luz FROM tb_container WHERE tb_container.id_co = vID_CO;
     SELECT cor_luz_ideal INTO vCor_luz_ideal FROM tb_vegetal, tb_plantado
@@ -143,8 +144,7 @@ BEGIN
     ELSE 
         pUMIDADE := 0;
     END IF;
-    
-END;
+end;$$
 
 -- TESTE DA PROCEDURE pc_checa_condicoes (TEM QUE COLOCAR PRA PRINTAR NOS IFS E ELSES)-- 
 DECLARE
