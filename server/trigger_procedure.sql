@@ -1,40 +1,43 @@
 --O trigger tr_update_container é responsável por manter histórico das alterações feitas em cada container automaticamente,--
 --inserindo registros nas tabelas de log toda vez que uma alteração é feita em um container--
+create or replace function update_trigger_func()
+returns trigger as $$
+begin
+        if(old.cor_luz <> new.cor_luz) then
+            insert into tb_log_cor_luz values(sq_log_cor_luz.nextval,old.id_co,new.cor_luz,current_date);
+        end if;
+        
+        if(old.periodo_irrigacao <> new.periodo_irrigacao) then
+            insert into tb_log_periodo_irrigacao values(sq_log_periodo_irrigacao.nextval,old.id_co,new.periodo_irrigacao,current_date);
+        end if;
+        
+        if(old.temperatura <> new.temperatura) then
+            insert into tb_log_temperatura values(sq_log_temperatura.nextval,old.id_co,new.temperatura,current_date);
+        end if;
+        
+        if(old.umidade <> new.umidade) then
+            insert into tb_log_umidade values(sq_log_umidade.nextval,old.id_co,new.umidade,current_date);
+        end if;
+        
+        if(old.intensidade_luz <> new.intensidade_luz) then
+            insert into tb_log_intensidade_luz values(sq_log_intensidade_luz.nextval,old.id_co,new.intensidade_luz,current_date);
+        end if;
+        
+        if(old.intensidade_irrigacao <> new.intensidade_irrigacao) then
+            insert into tb_log_intensidade_irrigacao values(sq_log_intensidade_irrigacao.nextval,old.id_co,new.intensidade_irrigacao,current_date);
+        end if;
+        
+        if(old.capacidade_tanque_atu <> new.capacidade_tanque_atu) then
+            insert into tb_log_capacidade_tanque_atu values(sq_log_capacidade_tanque_atu.nextval,old.id_co,new.capacidade_tanque_atu,current_date);
+        end if;
+    return null;
+end;
+$$ language plpgsql;
 
-create or replace trigger tr_update_container
+create or replace trigger tg_update_container
 before update on tb_container
 for each row
-
-begin
-        if(:old.cor_luz <> :new.cor_luz) then
-            insert into tb_log_cor_luz values(sq_log_cor_luz.nextval,:old.id_co,:new.cor_luz,SYSDATE);
-        end if;
-        
-        if(:old.periodo_irrigacao <> :new.periodo_irrigacao) then
-            insert into tb_log_periodo_irrigacao values(sq_log_periodo_irrigacao.nextval,:old.id_co,:new.periodo_irrigacao,SYSDATE);
-        end if;
-        
-        if(:old.temperatura <> :new.temperatura) then
-            insert into tb_log_temperatura values(sq_log_temperatura.nextval,:old.id_co,:new.temperatura,SYSDATE);
-        end if;
-        
-        if(:old.umidade <> :new.umidade) then
-            insert into tb_log_umidade values(sq_log_umidade.nextval,:old.id_co,:new.umidade,SYSDATE);
-        end if;
-        
-        if(:old.intensidade_luz <> :new.intensidade_luz) then
-            insert into tb_log_intensidade_luz values(sq_log_intensidade_luz.nextval,:old.id_co,:new.intensidade_luz,SYSDATE);
-        end if;
-        
-        if(:old.intensidade_irrigacao <> :new.intensidade_irrigacao) then
-            insert into tb_log_intensidade_irrigacao values(sq_log_intensidade_irrigacao.nextval,:old.id_co,:new.intensidade_irrigacao,SYSDATE);
-        end if;
-        
-        if(:old.capacidade_tanque_atu <> :new.capacidade_tanque_atu) then
-            insert into tb_log_capacidade_tanque_atu values(sq_log_capacidade_tanque_atu.nextval,:old.id_co,:new.capacidade_tanque_atu,SYSDATE);
-        end if;
-    
-end;
+execute procedure update_trigger_func();
     
 --O trigger tr_insert_container é responsável por gerar o registro da primeira entrada de um container no sistema,--
 --captando as configurações iniciais--
