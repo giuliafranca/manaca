@@ -5,7 +5,7 @@ function NotificacaoContainer(props) {
         <>
             {props.detalhes.map((valor, indice)=>
                 <div className="notificacao" key={indice}>
-                    <p className="noticacao-box"> O compo {valor.titulo} foi atualizado para  {valor.desc}.</p>
+                    <p className="noticacao-box"> O campo {valor.titulo} foi atualizado para  {valor.desc}.</p>
                 </div>
             )}
         </>
