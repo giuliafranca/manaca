@@ -1,21 +1,15 @@
-alter session set nls_date_format = 'DD/MM/YYYY HH24:MI:SS';
-
 create table tb_cliente(
-    id_C int not null,
+    id_c serial primary key,
     nome varchar(30) not null,
     cpf varchar(14) not null,
     senha varchar(60) not null,
     email varchar(60) not null,
     
-    primary key(id_c)
+    unique(id_c, cpf)
 );
 
-create sequence sq_cliente
-start with 1
-increment by 1;
-
 create table tb_container(
-    id_co int not null,
+    id_co serial primary key,
     id_c int not null,
     endereco varchar(120) not null,
     cor_luz varchar(20) not null,
@@ -27,118 +21,82 @@ create table tb_container(
     capacidade_tanque_max int not null,
     capacidade_tanque_atu int not null,
     
-    primary key(id_co)
+    unique(id_co) 
 );
-
-create sequence sq_container
-start with 1
-increment by 1;
 
 create table tb_log_intensidade_luz(
-    id_lil int not null,
+    id_lil serial primary key,
     id_co int not null,
     intensidade_luz numeric(5,2) not null,
-    data_hora date not null,
+    data_hora timestamp not null default current_timestamp,
     
-    primary key(id_lil)
+    unique(id_lil)
 );
-
-create sequence sq_log_intensidade_luz
-start with 1
-increment by 1;
 
 create table tb_log_intensidade_irrigacao(
-    id_lii int not null,
+    id_lii serial primary key,
     id_co int not null,
     intensidade_irrigacao int not null,
-    data_hora date not null,
+    data_hora timestamp not null default current_timestamp,
     
-    primary key(id_lii)
+    unique(id_lii)
 );
-
-create sequence sq_log_intensidade_irrigacao
-start with 1
-increment by 1;
 
 create table tb_log_capacidade_tanque_atu(
-    id_lcta int not null,
+    id_lcta serial primary key,
     id_co int not null,
     intensidade_capacidade_tanque_atu int not null,
-    data_hora date not null,
+    data_hora timestamp not null default current_timestamp,
     
-    primary key(id_lcta)
+    unique(id_lcta)
 );
-
-create sequence sq_log_capacidade_tanque_atu
-start with 1
-increment by 1;
 
 create table tb_log_cor_luz(
-    id_lcl int not null,
+    id_lcl serial primary key,
     id_co int not null,
     cor_luz varchar(20) not null,
-    data_hora date not null,
+    data_hora timestamp not null default current_timestamp,
     
-    primary key(id_lcl)
+    unique(id_lcl)
 );
-
-create sequence sq_log_cor_luz
-start with 1
-increment by 1;
 
 create table tb_log_periodo_irrigacao(
-    id_lpi int not null,
+    id_lpi serial primary key,
     id_co int not null,
     periodo_irrigacao int not null,
-    data_hora date not null,
+    data_hora timestamp not null default current_timestamp,
     
-    primary key(id_lpi)
+    unique(id_lpi)
 );
-
-create sequence sq_log_periodo_irrigacao
-start with 1
-increment by 1;
 
 create table tb_log_temperatura(
-    id_lt int not null,
+    id_lt serial primary key,
     id_co int not null,
     temperatura numeric(5,2) not null,
-    data_hora date not null,
+    data_hora timestamp not null default current_timestamp,
     
-    primary key(id_lt)
+    unique(id_lt)
 );
-
-create sequence sq_log_temperatura
-start with 1
-increment by 1;
 
 create table tb_log_umidade(
-    id_lu int not null,
+    id_lu serial primary key,
     id_co int not null,
     umidade numeric(5,2) not null,
-    data_hora date not null,
+    data_hora timestamp not null default current_timestamp,
     
-    primary key(id_lu)
+    unique(id_lu)
 );
 
-create sequence sq_log_umidade
-start with 1
-increment by 1;
-
 create table tb_plantado(
-    id_p int not null,
+    id_p serial primary key,
     id_co int not null,
     id_v int not null,
     
-    primary key(id_p)
+    unique(id_p)
 );
 
-create sequence sq_plantado
-start with 1
-increment by 1;
-
 create table tb_vegetal(
-    id_v int not null,
+    id_v serial primary key,
     nome varchar(30) not null,
     temperatura_ideal numeric(5,2) not null,
     cor_luz_ideal varchar(20) not null,
@@ -148,36 +106,24 @@ create table tb_vegetal(
     intensidade_luz_ideal numeric(5,2) not null,
     tempo_plantado_ideal int not null,
     
-    primary key(id_v)
+    unique(id_v)
 );
-
-create sequence sq_vegetal
-start with 1
-increment by 1;
 
 create table tb_movimentacoes_plantacao(
-    id_mp int not null,
+    id_mp serial primary key,
     id_p int not null,
     id_tm int not null,
-    data_movimentacao date not null,
+    data_movimentacao timestamp not null default current_timestamp,
     
-    primary key(id_mp)
+    unique(id_mp)
 );
-
-create sequence sq_movimentacoes_plantacao
-start with 1
-increment by 1;
 
 create table tb_tipo_movimentacao(
-    id_tm int not null,
+    id_tm serial primary key,
     nome varchar(20) not null,
     
-    primary key(id_tm)
+    unique(id_tm)
 );
-
-create sequence sq_tipo_movimentacao
-start with 1
-increment by 1;
 
 alter table tb_container add constraint fk_tb_container
 foreign key(id_c) references tb_cliente(id_c);
