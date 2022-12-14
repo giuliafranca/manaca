@@ -159,4 +159,4 @@ begin
 end;$$
 
 -- TESTE DA PROCEDURE pc_checa_condicoes (TEM QUE COLOCAR PRA PRINTAR NOS IFS E ELSES)-- 
-CALL pc_checa_condicoes(3, 0, 0, 0, 0, 0, 0);
+--CALL pc_checa_condicoes(3, 0, 0, 0, 0, 0, 0);
